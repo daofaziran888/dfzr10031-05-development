@@ -37,6 +37,19 @@ class Store:
                 "pending": sum(1 for row in rows if row.get("pending")),
                 "abnormal": sum(1 for row in rows if row.get("abnormal")),
             })
+        # 接入批次包是独立仓库，单独汇总到运营概览。
+        try:
+            from app.ingest.store import ingest_store
+
+            ing_files = ingest_store.files
+            modules.append({
+                "name": "ingest",
+                "created": len(ingest_store.batches),
+                "pending": sum(1 for f in ing_files if f.get("校验结论") == "不合格"),
+                "abnormal": sum(1 for f in ing_files if f.get("校验结论", "").startswith("重复")),
+            })
+        except ImportError:  # pragma: no cover - 防御性分支
+            pass
         cards = [
             {"label": "业务模块", "value": len(modules)},
             {"label": "今日新增", "value": sum(int(item["created"]) for item in modules)},

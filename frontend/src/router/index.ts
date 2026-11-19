@@ -4,6 +4,7 @@ import HomeDashboard from '@/views/Dashboard.vue'
 const MetricDef = () => import('@/views/metric_def/index.vue')
 const Dimension = () => import('@/views/dimension/index.vue')
 const Dataset = () => import('@/views/dataset/index.vue')
+const Ingest = () => import('@/views/ingest/index.vue')
 const Experiment = () => import('@/views/experiment/index.vue')
 const QueryBuilder = () => import('@/views/query_builder/index.vue')
 const Dashboard = () => import('@/views/dashboard/index.vue')
@@ -27,6 +28,7 @@ const router = createRouter({
     { path: '/metric_def', name: 'metric_def', component: MetricDef },
     { path: '/dimension', name: 'dimension', component: Dimension },
     { path: '/dataset', name: 'dataset', component: Dataset },
+    { path: '/ingest', name: 'ingest', component: Ingest },
     { path: '/experiment', name: 'experiment', component: Experiment },
     { path: '/query_builder', name: 'query_builder', component: QueryBuilder },
     { path: '/dashboard', name: 'dashboard', component: Dashboard },
